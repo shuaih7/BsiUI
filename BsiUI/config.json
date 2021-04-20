@@ -1,0 +1,26 @@
+{
+    "Widget": {
+        "Canvas": {
+            "off_w": 5,
+            "off_h": 5
+        },
+        "LogoWidget": {
+            "off_w": 5,
+            "off_h": 10,
+            "ratio_w": 0.35,
+            "ratio_h": 0.2
+        },
+        "OverviewWidget": {
+            "ratio_top": 0.05,
+            "ratio_right": 0.05,
+            "ratio_w": 0.1,
+            "ratio_h": 0.1
+        }
+    },
+    "Camera": {
+        "camera_num": 4,
+        "exposure_time": 1000,
+        "gain": 10,
+        "binning": 1
+    }
+}
