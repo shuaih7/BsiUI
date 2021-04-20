@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>涵道科技一体化相机</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon/hd_icon.jpg</normaloff>icon/hd_icon.jpg</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(0,0,0)</string>
@@ -54,9 +58,6 @@
          </property>
          <property name="text">
           <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap>../develop/GE90_1.png</pixmap>
          </property>
          <property name="alignment">
           <set>Qt::AlignHCenter|Qt::AlignTop</set>

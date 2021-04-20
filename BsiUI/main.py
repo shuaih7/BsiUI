@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 '''
-Created on 04.11.2021
-Updated on 04.11.2021
+Created on 04.20.2021
+Updated on 04.20.2021
 
 Author: haoshuai@handaotech.com
 '''
@@ -18,6 +18,7 @@ def main():
     Window = MainWindow()
     #Window.showMaximized()
     Window.show()
+    Window.live()
     sys.exit(app.exec_())
 
 

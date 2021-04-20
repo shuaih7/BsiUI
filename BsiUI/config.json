@@ -2,7 +2,8 @@
     "Widget": {
         "Canvas": {
             "off_w": 5,
-            "off_h": 5
+            "off_h": 5,
+            "max_scale": 10.0
         },
         "LogoWidget": {
             "off_w": 5,

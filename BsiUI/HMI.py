@@ -21,7 +21,7 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, pyqtSlot, QEvent, QSize, QRegExp
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox
 
 from device import OpenCVCamera
 
@@ -63,14 +63,26 @@ class MainWindow(QMainWindow):
         
     def resizeEvent(self, ev):
         for widget in self.resize_list:
-            widget.resize(self.size())
+            widget.resizeWidget(self.size())
             
     def live(self):
         while self.is_live:
             image_list = self.camera.getImageList()
             self.canvas.refresh(image_list)
-            
             QApplication.processEvents()
+            
+    def closeEvent(self, ev):   
+        reply = QMessageBox.question(
+            self,
+            "退出程序",
+            "您确定要退出吗?",
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No)
+
+        if reply == QMessageBox.Yes: 
+            #self.messager("FabricUI 已关闭。\n", flag="info")
+            sys.exit()
+        else: ev.ignore()
         
         
         

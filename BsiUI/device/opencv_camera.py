@@ -24,9 +24,9 @@ class OpenCVCamera(Camera):
 
     def initSettings(self):
         self.camera_num = self.params['camera_num']
-        self.set_expo(self.params["exposure_time"])
-        self.set_gain(self.params["gain"])
-        self.set_binning(self.params["binning"])
+        #self.set_expo(self.params["exposure_time"])
+        #self.set_gain(self.params["gain"])
+        #self.set_binning(self.params["binning"])
         
         self.image = cv2.imread(r'C:\Users\shuai\Documents\GitHub\BsiUI\develop\GE90_1.png', -1)
         self.image_list = [self.image, self.image, self.image, self.image]

@@ -19,7 +19,7 @@ class LogoWidget(QLabel):
     def setConfig(self, params):
         self.params = params
         
-    def resize(self, size):
+    def resizeWidget(self, size):
         off_w = int(self.params['off_w'])
         off_h = int(self.params['off_h'])
         ratio_w = float(self.params['ratio_w'])

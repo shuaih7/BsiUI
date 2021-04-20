@@ -19,5 +19,5 @@ class OverviewWidget(QLabel):
     def setConfig(self, params):
         self.params = params
         
-    def resize(self, size):
+    def resizeWidget(self, size):
         pass
