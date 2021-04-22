@@ -5,8 +5,8 @@
             "image_w": 720,
             "off_w": 5,
             "off_h": 5,
-            "zoom_factor": 1.2,
-            "max_scale": 15.0
+            "zoom_factor": 1.1,
+            "max_scale": 10.0
         },
         "LogoWidget": {
             "off_w": 5,

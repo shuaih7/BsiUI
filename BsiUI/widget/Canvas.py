@@ -37,7 +37,6 @@ class Canvas(QLabel):
     def initParams(self):
         self.mode = 'live'       # Canvas mode: live or mark
         self.scale = 1.0         # Concatenated image width / widget width, should be larger than 1
-        self.scale_factor = 1.0  # Scale compared to the previous image
         self.is_drag: False      # Whether the drag has been started
         self.is_register = False # Whether the image info has been regisgtered
         self.cursor = QPoint(self.width()/2, self.height()/2) # Cursor position
@@ -75,9 +74,17 @@ class Canvas(QLabel):
     def mouseMoveEvent(self, ev):
         if self.mode == 'live' and self.is_drag:
             self.moveContent(ev.pos())
+        elif self.mode == 'mark':
+            pass
         
     def mouseReleaseEvent(self, ev):
         self.is_drag = False
+        
+    def mouseDoubleClickEvent(self, ev):
+        if self.scale < self.max_scale:
+            self.resizeContent(ev.pos(), op='maximize')
+        else:
+            self.resizeContent(ev.pos(), op='minimize')
         
     def wheelEvent(self, ev):
         angle = ev.angleDelta().y()
@@ -103,31 +110,42 @@ class Canvas(QLabel):
         
         self.cursor = position
         
-    def resizeContent(self, position, angle=0):
+    def resizeContent(self, position, angle=0, op='normal'):
         x, y = position.x(), position.y()
         
-        image_h, image_w = self.image_h, self.image_w        # Original image height and width
-        disp_h = image_h * (self.scale*self.width()/image_w) # Previous image height displayed on the canvas
-        disp_w = image_w * (self.scale*self.width()/image_w) # Previous image width displayed on the canvas
-        
         # Update the scale and scale factor
-        if angle > 0: scale = min(self.max_scale, self.scale*self.zoom_factor)
+        if op in ['maximize', 'minimize']: 
+            if self.top_index < 0 and (y<=abs(self.top_index) \
+                or y>=abs(self.height()-abs(self.top_index))):
+                return
+            if op == 'maximize': scale = self.max_scale
+            else: scale = 1.0
+            
+        elif angle > 0: scale = min(self.max_scale, self.scale*self.zoom_factor)
         else: scale = max(1.0, self.scale/self.zoom_factor)
         scale_factor = scale / self.scale
+        
+        image_h, image_w = self.image_h, self.image_w   # Original image height and width
+        disp_h = image_h * (scale*self.width()/image_w) # Previous image height displayed on the canvas
+        disp_w = image_w * (scale*self.width()/image_w) # Previous image width displayed on the canvas
         
         # Update the over-widget pixels
         left_image_len = x + self.left_index # Distance from the cursor to the displayed image left boundary
         top_image_len = y + self.top_index   # Distance from the cursor to the displayed image top boundary
         
         self.left_index = max(0, int(left_image_len*scale_factor-x))
-        if self.top_index < 0:
-            self.top_index = int((disp_h*scale_factor - self.height())/2)
+        if disp_h < self.height():
+            self.top_index = int((disp_h - self.height())/2)
         else:
             self.top_index = int(top_image_len*scale_factor-y)
         
         self.scale = scale
-        self.scale_factor = scale_factor
         self.cursor = position
+        
+    def minimizeContent(self):
+        self.left_index = 0
+        self.top_index = int((self.height() - self.width()/self.image_w*self.image_h) / 2) * -1
+        self.scale = 1.0
         
     def registerImageInfo(self, image):
         assert self.scale == 1.0, 'Initial scale should be 1.0'
@@ -169,9 +187,12 @@ class Canvas(QLabel):
             
             left = self.left_index
             right = left + self.width()
-            if self.top_index > 0: top = self.top_index
-            else: top = 0
-            bottom = top + self.height()
+            if self.top_index > 0: 
+                top = self.top_index
+                bottom = top + self.height()
+            else: 
+                top = 0
+                bottom = disp_h
         else:
             left = int(self.left_index * image_w / disp_w)
             right = int((self.left_index + self.width()) * image_w / disp_w)
@@ -197,8 +218,8 @@ class Canvas(QLabel):
         painter = QPainter(self)
         
         if self.pixmap is not None: 
-            off_x = (self.size().width() - self.pixmap.width()) / 2
-            off_y = (self.size().height() - self.pixmap.height()) / 2
+            off_x = (self.width() - self.pixmap.width()) / 2
+            off_y = (self.height() - self.pixmap.height()) / 2
             painter.drawPixmap(off_x, off_y, self.pixmap)
             
             

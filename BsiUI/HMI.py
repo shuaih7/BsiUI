@@ -48,7 +48,7 @@ class MainWindow(QMainWindow):
         self.lbLogo.setConfig(widget_params['LogoWidget'])
         self.lbOverview.setConfig(widget_params['OverviewWidget'])
         
-        self.resize_list = [
+        self.frame_resize_list = [
             self.canvas,
             self.lbLogo,
             self.lbOverview
@@ -62,10 +62,15 @@ class MainWindow(QMainWindow):
         self.camera = OpenCVCamera(camera_params)
         
     def resizeEvent(self, ev):
-        for widget in self.resize_list:
-            widget.resizeWidget(self.size())
+        self.resizeFrameWidget()
+    
+    def resizeFrameWidget(self):
+        for widget in self.frame_resize_list:
+            widget.resizeWidget(self.frame.size())
             
     def live(self):
+        self.resizeFrameWidget()
+        
         while self.is_live:
             image_list = self.camera.getImageList()
             self.canvas.refresh(image_list)
