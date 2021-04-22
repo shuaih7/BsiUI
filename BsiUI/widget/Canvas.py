@@ -19,6 +19,7 @@ from PyQt5.QtGui import QImage, QPixmap, QPainter, QPen, QColor
 
 
 def format_image(image): # Gray to RGB
+    if image is None: return
     if image.shape[-1] == 4: 
         image = image[:,:,:3]
     elif image.shape[-1] != 3: 
@@ -34,8 +35,10 @@ class Canvas(QLabel):
         self.initParams()
     
     def initParams(self):
+        self.mode = 'live'       # Canvas mode: live or mark
         self.scale = 1.0         # Concatenated image width / widget width, should be larger than 1
         self.scale_factor = 1.0  # Scale compared to the previous image
+        self.is_drag: False      # Whether the drag has been started
         self.is_register = False # Whether the image info has been regisgtered
         self.cursor = QPoint(self.width()/2, self.height()/2) # Cursor position
         
@@ -62,12 +65,50 @@ class Canvas(QLabel):
         height = max(10, size.height() - 2*off_h)
         self.setGeometry(off_w, off_h, width, height)
         
-    def resizeContent(self, angle, position):
+    def mousePressEvent(self, ev):
+        if self.mode == 'live':
+            self.is_drag = True
+            self.cursor = ev.pos()
+        elif self.mode == 'mark':
+            pass
+        
+    def mouseMoveEvent(self, ev):
+        if self.mode == 'live' and self.is_drag:
+            self.moveContent(ev.pos())
+        
+    def mouseReleaseEvent(self, ev):
+        self.is_drag = False
+        
+    def wheelEvent(self, ev):
+        angle = ev.angleDelta().y()
+        position = ev.pos()
+        self.resizeContent(position, angle)
+        
+    def moveContent(self, position):
+        x0, y0 = self.cursor.x(), self.cursor.y()
         x, y = position.x(), position.y()
         
         image_h, image_w = self.image_h, self.image_w        # Original image height and width
         disp_h = image_h * (self.scale*self.width()/image_w) # Image height displayed on the canvas
         disp_w = image_w * (self.scale*self.width()/image_w) # Image width displayed on the canvas
+        
+        # Update the over-widget pixels
+        off_x = x - x0
+        off_y = y - y0
+        self.left_index = max(0, self.left_index - off_x)
+        self.left_index = min(int(disp_w-self.width()), self.left_index)
+        if self.top_index >= 0: 
+            self.top_index = max(0, self.top_index - off_y)
+            self.top_index = min(int(disp_h-self.height()), self.top_index)
+        
+        self.cursor = position
+        
+    def resizeContent(self, position, angle=0):
+        x, y = position.x(), position.y()
+        
+        image_h, image_w = self.image_h, self.image_w        # Original image height and width
+        disp_h = image_h * (self.scale*self.width()/image_w) # Previous image height displayed on the canvas
+        disp_w = image_w * (self.scale*self.width()/image_w) # Previous image width displayed on the canvas
         
         # Update the scale and scale factor
         if angle > 0: scale = min(self.max_scale, self.scale*self.zoom_factor)
@@ -79,8 +120,8 @@ class Canvas(QLabel):
         top_image_len = y + self.top_index   # Distance from the cursor to the displayed image top boundary
         
         self.left_index = max(0, int(left_image_len*scale_factor-x))
-        if top_image_len < 0:
-            self.top_index = int((disp_h - self.height)/2)
+        if self.top_index < 0:
+            self.top_index = int((disp_h*scale_factor - self.height())/2)
         else:
             self.top_index = int(top_image_len*scale_factor-y)
         
@@ -96,16 +137,9 @@ class Canvas(QLabel):
         self.left_index = 0
         self.top_index = int((widget_h - (widget_w/self.image_w)*self.image_h) / 2) * -1
         self.is_register = True
-        
-    def mousePressEvent(self, ev):
-        pass
-        
-    def wheelEvent(self, ev):
-        angle = ev.angleDelta().y()
-        position = ev.pos()
-        self.resizeContent(angle, position)
-        
+     
     def concatImageList(self, image_list):
+        image_list = self.checkImageList(image_list)
         if len(image_list) == 0: return None
         elif len(image_list) == 1: return image_list[0]
         
@@ -113,6 +147,15 @@ class Canvas(QLabel):
         image_concat = np.hstack(image_list)
         
         return image_concat
+        
+    def checkImageList(self, image_list):
+        image_list_checked = list()
+        for i, image in enumerate(image_list):
+            if image is None: continue
+            image = format_image(image)
+            image_list_checked.append(image)
+        
+        return image_list_checked
         
     def cropResizeImage(self, image):
         image_h, image_w = self.image_h, self.image_w
