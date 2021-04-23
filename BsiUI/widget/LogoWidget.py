@@ -41,10 +41,10 @@ class LogoWidget(QLabel):
         ratio_w = float(self.params['ratio_w'])
         ratio_h = float(self.params['ratio_h'])
         
-        self.updatePixmap()
         width = int(size.width() * ratio_w)
         height = int(size.height() * ratio_h)
         self.setGeometry(off_w, off_h, width, height)
+        self.updatePixmap()
                 
     def updatePixmap(self):
         img_w, img_h = self.img.size

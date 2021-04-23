@@ -48,6 +48,7 @@ class MainWindow(QMainWindow):
         self.canvas.setConfig(widget_params['Canvas'])
         self.lbLogo.setConfig(widget_params['LogoWidget'])
         self.lbOverview.setConfig(widget_params['OverviewWidget'])
+        self.canvas.registerWidget(logo=self.lbLogo, overview=self.lbOverview)
         
         self.frame_resize_list = [
             self.canvas,
