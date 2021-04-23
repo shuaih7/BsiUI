@@ -149,18 +149,28 @@ class Canvas(QLabel):
         disp_h = image_h * (scale*self.width()/image_w) # Image height displayed on the canvas
         disp_w = image_w * (scale*self.width()/image_w) # Image width displayed on the canvas
         
-        # Update the over-widget pixels
-        left_image_len = x + self.left_index # Distance from the cursor to the displayed image left boundary
-        top_image_len = y + self.top_index   # Distance from the cursor to the displayed image top boundary
+        # Distance from the cursor to the displayed image's boundary after resize
+        left_image_len = int((x + self.left_index) * scale_factor)
+        self.left_index = max(0, left_image_len - x)
         
-        self.left_index = max(0, int(left_image_len*scale_factor-x))
         if disp_h < self.height():
             self.top_index = int((disp_h - self.height())/2)
         else:
-            self.top_index = int(top_image_len*scale_factor-y)
+            if self.top_index >= 0:
+                top_image_len = (y + self.top_index) * scale_factor
+                self.top_index = int(top_image_len - y)
+            else:
+                abs_top_index = abs(self.top_index)
+                if y < abs_top_index: y = abs_top_index + 1
+                elif y > self.height() - abs_top_index: y = self.height() - abs_top_index - 1
+                
+                dist_to_image_top = y - abs_top_index
+                if dist_to_image_top * scale_factor < y:
+                    self.top_index = 0
+                else:
+                    self.top_index = min(disp_h-self.height(), dist_to_image_top*scale_factor-y)
         
         self.scale = scale
-        self.cursor = position
         
     def resetContent(self):
         self.left_index = 0
