@@ -20,10 +20,11 @@ sys.path.append(abs_path)
 from PyQt5.uic import loadUi
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, pyqtSlot, QEvent, QSize, QRegExp
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox
+from PyQt5.QtCore import Qt, pyqtSlot, QSize
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from device import OpenCVCamera
+from widget import MessageBox
 
 
 class MainWindow(QMainWindow):
@@ -77,17 +78,20 @@ class MainWindow(QMainWindow):
             QApplication.processEvents()
             
     def closeEvent(self, ev):   
-        reply = QMessageBox.question(
+        """
+        reply = self.message_box.question(
             self,
             "退出程序",
             "您确定要退出吗?",
-            QMessageBox.Yes | QMessageBox.No,
-            QMessageBox.No)
+            MessageBox.Yes | MessageBox.No,
+            MessageBox.No)
 
-        if reply == QMessageBox.Yes: 
+        if reply == MessageBox.Yes: 
             #self.messager("FabricUI 已关闭。\n", flag="info")
             sys.exit()
         else: ev.ignore()
+        """
+        sys.exit()
         
         
         

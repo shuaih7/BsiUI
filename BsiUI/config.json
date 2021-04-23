@@ -9,6 +9,7 @@
             "max_scale": 10.0
         },
         "LogoWidget": {
+            "logo_file": "HDTLOGO.png",
             "off_w": 5,
             "off_h": 10,
             "ratio_w": 0.35,

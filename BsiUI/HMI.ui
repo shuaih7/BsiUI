@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>940</width>
-    <height>583</height>
+    <height>598</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>icon/hd_icon.jpg</normaloff>icon/hd_icon.jpg</iconset>
+    <normaloff>../../../../.designer/backup/icon/hd_icon.jpg</normaloff>../../../../.designer/backup/icon/hd_icon.jpg</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(0,0,0)</string>
@@ -68,8 +68,8 @@
           <rect>
            <x>-10</x>
            <y>-10</y>
-           <width>321</width>
-           <height>121</height>
+           <width>281</width>
+           <height>131</height>
           </rect>
          </property>
          <property name="styleSheet">
@@ -79,7 +79,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>icon/HDTLOGO.png</pixmap>
+          <pixmap>../../../../.designer/backup/icon/HDTLOGO.png</pixmap>
          </property>
         </widget>
         <widget class="OverviewWidget" name="lbOverview">

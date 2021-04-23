@@ -3,7 +3,7 @@
 
 '''
 Created on 04.20.2021
-Updated on 04.20.2021
+Updated on 04.23.2021
 
 Author: haoshuai@handaotech.com
 '''
@@ -20,4 +20,7 @@ class OverviewWidget(QLabel):
         self.params = params
         
     def resizeWidget(self, size):
+        pass
+        
+    def paintEvent(self, event):
         pass
