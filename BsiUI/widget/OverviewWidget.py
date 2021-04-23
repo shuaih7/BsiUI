@@ -20,7 +20,7 @@ class OverviewWidget(QLabel):
         self.initParams()
         
     def initParams(self):
-        self.color = QColor(255,165,0)
+        self.color = QColor(0,165,165)
         self.ov_left = 0
         self.ov_right = 0
         self.ov_top = 0
@@ -49,12 +49,12 @@ class OverviewWidget(QLabel):
         
         self.ov_left = int(left_index/(frame_w*scale)*ov_width)
         self.ov_right = int((left_index+frame_w)/disp_w*ov_width)
-        if top_index <= 0:
+        if top_index < 0:
             self.ov_top = 0
             self.ov_bottom = ov_height
         else:
-            self.ov_top = int(top_index/(frame_h*scale)*ov_height)
-            self.ov_bottom = int((top_index+frame_h)/disp_h*ov_height)
+            self.ov_top = int(top_index/disp_h*ov_height)
+            self.ov_bottom = int(self.ov_top+frame_h/disp_h*ov_height)
             
         self.update()
         
