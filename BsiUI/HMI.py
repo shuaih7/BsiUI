@@ -24,7 +24,7 @@ from PyQt5.QtCore import Qt, pyqtSlot, QSize
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from device import OpenCVCamera
-from widget import MessageBox
+from widget import MessageBox, MarkWidget
 
 
 class MainWindow(QMainWindow):
@@ -45,7 +45,9 @@ class MainWindow(QMainWindow):
             
     def initWidgets(self):
         widget_params = self.config_matrix['Widget']
+        self.mark_widget = MarkWidget()
         self.canvas.setConfig(widget_params['Canvas'])
+        self.btnMark.setConfig(widget_params['MarkButton'])
         self.lbLogo.setConfig(widget_params['LogoWidget'])
         self.lbOverview.setConfig(widget_params['OverviewWidget'])
         self.canvas.registerWidget(logo=self.lbLogo, overview=self.lbOverview)
@@ -53,11 +55,13 @@ class MainWindow(QMainWindow):
         self.frame_resize_list = [
             self.canvas,
             self.lbLogo,
-            self.lbOverview
+            self.lbOverview,
+            self.btnMark
         ]
         
     def initParmas(self):
-        self.is_live = True
+        self.mode = 'live'
+        self.disp_mark = False
         
     def initCamera(self):
         camera_params = self.config_matrix['Camera']
@@ -73,10 +77,28 @@ class MainWindow(QMainWindow):
     def live(self):
         self.resizeFrameWidget()
         
-        while self.is_live:
+        while self.mode == 'live':
             image_list = self.camera.getImageList()
             self.canvas.refresh(image_list)
             QApplication.processEvents()
+            
+    @pyqtSlot()
+    def dispMarkWidget(self):
+        if not self.disp_mark:
+            self.mark_widget.show()
+            self.disp_mark = True
+        else:
+            self.mark_widget.close()
+            self.disp_mark = False
+        self.shiftMode()
+            
+    def shiftMode(self, mode='live'):
+        if self.mode == mode: return
+        self.mode = mode
+        self.canvas.mode = mode
+        
+        if mode == 'live':
+            self.live()
             
     def closeEvent(self, ev):   
         """
@@ -92,6 +114,7 @@ class MainWindow(QMainWindow):
             sys.exit()
         else: ev.ignore()
         """
+        self.mark_widget.close()
         sys.exit()
         
         

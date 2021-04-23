@@ -3,7 +3,7 @@
 
 '''
 Created on 04.20.2021
-Updated on 04.22.2021
+Updated on 04.23.2021
 
 Author: haoshuai@handaotech.com
 '''
@@ -68,6 +68,7 @@ class Canvas(QLabel):
         width = max(10, size.width() - 2*off_w)
         height = max(10, size.height() - 2*off_h)
         self.setGeometry(off_w, off_h, width, height)
+        if self.is_register: self.setWidgetGeometry()
     
     def setWidgetGeometry(self):
         image_w = self.image_w

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>320</width>
+    <height>160</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>320</width>
+    <height>160</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>320</width>
+    <height>160</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>缺陷标注</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icon/hd_icon.jpg</normaloff>../icon/hd_icon.jpg</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:rgb(150,150,150)</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1">
+     <property name="spacing">
+      <number>15</number>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="PushButton" name="btnPoint">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:2px groove gray; border-radius:8px;padding:2px 4px;background-color:rgb(160,160,160)</string>
+         </property>
+         <property name="text">
+          <string>*</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PushButton" name="btnLine">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:2px groove gray; border-radius:8px;padding:2px 4px;background-color:rgb(160,160,160)</string>
+         </property>
+         <property name="text">
+          <string>---</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PushButton" name="btnCircle">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:2px groove gray; border-radius:8px;padding:2px 4px;background-color:rgb(160,160,160)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../icon/circle.png</normaloff>../icon/circle.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PushButton" name="btnRect">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:2px groove gray; border-radius:8px;padding:2px 4px;background-color:rgb(160,160,160)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../icon/rectangle.png</normaloff>../icon/rectangle.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,3">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,1">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+         <item>
+          <widget class="PushButton" name="btnSave">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border:2px groove gray; border-radius:8px;padding:2px 4px;background-color:rgb(160,160,160)</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../icon/checked.png</normaloff>../icon/checked.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="PushButton" name="btnUndo">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border:2px groove gray; border-radius:8px;padding:2px 4px;background-color:rgb(160,160,160)</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <selectedon>../icon/undo.png</selectedon>
+            </iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="PushButton" name="btnDiscard">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border:2px groove gray; border-radius:8px;padding:2px 4px;background-color:rgb(160,160,160)</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../icon/discard.png</normaloff>../icon/discard.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PushButton</class>
+   <extends>QPushButton</extends>
+   <header location="global">widget/PushButton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnPoint</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>setPointMarker()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>25</x>
+     <y>37</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>46</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnLine</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>setLineMarker()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>79</x>
+     <y>43</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>84</x>
+     <y>169</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCircle</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>setCircleMarker()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>144</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>133</x>
+     <y>148</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnRect</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>setRectMarker()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>207</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>187</x>
+     <y>179</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnSave</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>save()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>79</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>10</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnUndo</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>undo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>161</x>
+     <y>88</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>154</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDiscard</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>discard()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>186</x>
+     <y>100</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>176</x>
+     <y>154</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>setPointMarker()</slot>
+  <slot>setLineMarker()</slot>
+  <slot>setCircleMarker()</slot>
+  <slot>setRectMarker()</slot>
+  <slot>save()</slot>
+  <slot>undo()</slot>
+  <slot>discard()</slot>
+ </slots>
+</ui>

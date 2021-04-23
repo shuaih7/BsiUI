@@ -10,8 +10,8 @@ Author: haoshuai@handaotech.com
 
 import os
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QLabel
+from PyQt5.QtGui import QPainter, QColor
 
 
 class OverviewWidget(QLabel):
@@ -20,7 +20,7 @@ class OverviewWidget(QLabel):
         self.initParams()
         
     def initParams(self):
-        self.color = QColor(0,165,165)
+        self.color = QColor(0,125,165,80)
         self.ov_left = 0
         self.ov_right = 0
         self.ov_top = 0
