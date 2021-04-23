@@ -10,17 +10,19 @@ Author: haoshuai@handaotech.com
 
 import os
 from PyQt5.uic import loadUi
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QDialog
 from PyQt5.QtCore import Qt, pyqtSignal, pyqtSlot
 
 
-class MarkWidget(QWidget):
+class MarkWidget(QDialog):
     markSignal = pyqtSignal(str)
     saveSignal = pyqtSignal(dict)
     
     def __init__(self, parent=None):
         super(MarkWidget, self).__init__(parent)
         loadUi(os.path.join(os.path.abspath(os.path.dirname(__file__)), "MarkWidget.ui"), self)
+        self.setWindowFlags(Qt.WindowStaysOnTopHint)
+        self.setWindowFlags(Qt.Widget)
         self.initParams()
         
     def initParams(self):

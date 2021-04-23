@@ -86,6 +86,7 @@ class MainWindow(QMainWindow):
     def dispMarkWidget(self):
         if not self.disp_mark:
             self.mark_widget.show()
+            self.mark_widget.raise_()
             self.disp_mark = True
         else:
             self.mark_widget.close()
@@ -99,6 +100,9 @@ class MainWindow(QMainWindow):
         
         if mode == 'live':
             self.live()
+            
+    def mousePressEvent(self, ev):
+        self.mark_widget.raise_()
             
     def closeEvent(self, ev):   
         """
